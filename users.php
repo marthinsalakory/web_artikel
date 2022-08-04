@@ -5,16 +5,16 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Semua Artikel
+                    Kelola Users
                 </h1>
                 <ol class="breadcrumb" style="position: relative;">
                     <li>
                         <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-users"></i> Semua Artikel
+                        <i class="fa fa-users"></i> Kelola Users
                     </li>
-                    <a href="tulis.php" class="btn btn-primary" style="position: absolute; right: 0; transform: translate(0, -20%);"><i class="fa fa-plus"></i></a>
+                    <a href="tambah_user.php" class="btn btn-primary" style="position: absolute; right: 0; transform: translate(0, -20%);"><i class="fa fa-plus"></i></a>
                 </ol>
             </div>
         </div>
@@ -35,22 +35,23 @@
                     <thead>
                         <tr>
                             <th class="text-center" scope="col">No</th>
-                            <th class="text-center" scope="col">Tanggal</th>
-                            <th class="text-center" scope="col">Penulis</th>
-                            <th class="text-center" scope="col">Topik</th>
+                            <th class="text-center" scope="col">Username</th>
+                            <th class="text-center" scope="col">Nama Lengkap</th>
+                            <th class="text-center" scope="col">Nim</th>
+                            <th class="text-center" scope="col">Terakhir Aktif</th>
                             <th class="text-center" scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th class="text-center" scope="row">1</th>
-                            <td class="text-center"><?= datetime(); ?></td>
+                            <td class="text-center">Aurelia</td>
                             <td class="text-center">Aurelia Martha Mavalda Huwae</td>
-                            <td class="text-center">Peran KKN Sebagai Upaya Pemersatu Masyarakat</td>
+                            <td class="text-center">201971032</td>
+                            <td class="text-center"><?= datetime(); ?></td>
                             <td class="text-center">
-                                <a href="detail.php?id=1" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                <a href="edit_artikel.php" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="hapus.php?hapus_artikel=1" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                <a href="edit_users.php" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                <a href="hapus.php?hapus_user=1" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     </tbody>
