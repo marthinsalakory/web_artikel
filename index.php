@@ -19,15 +19,17 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i> <strong>Selamat Datang</strong>
-                        </div>
+        <?php if (isset($_SESSION['info'])) : ?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i> <strong><?= $_SESSION['info']; ?></strong>
                     </div>
-                </div> -->
-        <!-- /.row -->
+                </div>
+            </div>
+            <?php unset($_SESSION['info']); ?>
+        <?php endif; ?>
 
         <div class="row" style="height: 80vh;">
             <div class="col-lg-12">
@@ -42,17 +44,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="text-center" scope="row">1</th>
-                            <td class="text-center"><?= datetime(); ?></td>
-                            <td class="text-center">Aurelia Martha Mavalda Huwae</td>
-                            <td class="text-center">Peran KKN Sebagai Upaya Pemersatu Masyarakat</td>
-                            <td class="text-center">
-                                <a href="detail.php?id=1" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                <a href="edit_artikel.php" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="hapus.php?hapus_artikel=1" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        <?php foreach (findAll('artikel') as $a) : ?>
+                            <tr>
+                                <th class="text-center" scope="row">1</th>
+                                <td class="text-center"><?= $a['tanggal']; ?></td>
+                                <td class="text-center"><?= $a['penulis']; ?></td>
+                                <td class="text-center"><?= $a['topik']; ?></td>
+                                <td class="text-center">
+                                    <a href="detail.php?id=<?= $a['id']; ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                    <a href="edit_artikel.php?id=<?= $a['id']; ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a href="hapus.php?hapus_artikel=<?= $a['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

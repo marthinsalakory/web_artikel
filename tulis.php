@@ -1,4 +1,21 @@
-<?php include 'header.php'; ?>
+<?php
+include 'header.php';
+if (isset($_POST['submit'])) {
+    $topik = $_POST['topik'];
+    $tanggal = datetime();
+    $penulis = user()->nama_lengkap;
+    $isi = $_POST['isi'];
+    $ext = $_FILES['gambar']['name'];
+    $ext = explode('.', $ext);
+    $ext = end($ext);
+    $gambar = uniqid() . '.' . $ext;
+    move_uploaded_file($_FILES['gambar']['tmp_name'], 'uploads/' . $gambar);
+    $result = mysqli_query($conn, "INSERT INTO `artikel`(`topik`, `tanggal`, `penulis`, `isi`, `gambar`) VALUES ('$topik','$tanggal','$penulis','$isi','$gambar')");
+    $_SESSION['info'] = "Berhasil Menambahkan Artikel";
+    header('Location: index.php');
+    exit;
+}
+?>
 
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -32,7 +49,7 @@
                         <label class="form-label" for="isi">Isi <span class="text-danger">*</span></label>
                         <textarea required autocomplete="off" class="form-control" name="isi" id="isi" rows="10"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button name="submit" type="submit" class="btn btn-primary">Simpan</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                     <a href="index.php" class="btn btn-warning">Kembali</a>
                 </form>
