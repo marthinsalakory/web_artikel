@@ -1,10 +1,21 @@
 <?php
 
 include 'function.php';
+if (isset($_SESSION['login'])) {
+    header("Location: index.php");
+    exit;
+}
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE `username` = '$username' && `password` = '$password'"))) {
+        $_SESSION['login'] = mysqli_query($conn, "SELECT * FROM users WHERE `username` = '$username' && `password` = '$password'")->fetch_object();
+        header('Location: index.php');
+        exit;
+    } else {
+        $error = 1;
+    }
 }
 
 ?>
@@ -44,6 +55,14 @@ if (isset($_POST['login'])) {
             color: blue;
             font-size: 40px;
             margin: 0;
+        }
+
+        .alert {
+            background-color: red;
+            margin: 20px;
+            padding: 10px;
+            color: #fff;
+            text-align: center;
         }
 
         .form-group {
@@ -90,6 +109,11 @@ if (isset($_POST['login'])) {
 <body>
     <div class="card-login">
         <h3 class="login-title">LOGIN</h3>
+        <?php if (isset($error)) : ?>
+            <div class="alert">
+                Username atau Password Salah
+            </div>
+        <?php endif; ?>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>

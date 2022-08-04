@@ -48,3 +48,18 @@ function find($table, $key, $value)
     $conn = $GLOBALS['conn'];
     return mysqli_query($conn, "SELECT * FROM $table WHERE $key = $value")->fetch_object();
 }
+
+function isLogin()
+{
+    if (!isset($_SESSION['login'])) {
+        header("Location: logout.php");
+        exit;
+    }
+}
+
+function user()
+{
+    global $conn;
+    $id = $_SESSION['login']->id;
+    return mysqli_query($conn, "SELECT * FROM users WHERE id = $id")->fetch_object();
+}
