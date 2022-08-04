@@ -1,6 +1,7 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'root', '');
+session_start();
+$conn = mysqli_connect('localhost', 'root', '', 'web_artikel');
 
 function datetime()
 {
@@ -33,4 +34,17 @@ function datetime()
     ];
 
     return $nama_hari[$hari] . ', ' . date('d ') . $nama_bulan[$bulan] . date(' Y, H:i:s') . ' WIB';
+}
+
+
+function findAll($table)
+{
+    $conn = $GLOBALS['conn'];
+    return mysqli_query($conn, "SELECT * FROM $table");
+}
+
+function find($table, $key, $value)
+{
+    $conn = $GLOBALS['conn'];
+    return mysqli_query($conn, "SELECT * FROM $table WHERE $key = $value")->fetch_object();
 }

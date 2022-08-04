@@ -19,15 +19,17 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i> <strong>Selamat Datang</strong>
-                        </div>
+        <?php if (isset($_SESSION['info'])) : ?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i> <strong><?= $_SESSION['info']; ?></strong>
                     </div>
-                </div> -->
-        <!-- /.row -->
+                </div>
+            </div>
+            <?php unset($_SESSION['info']); ?>
+        <?php endif; ?>
 
         <div class="row" style="height: 80vh;">
             <div class="col-lg-12">
@@ -43,17 +45,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="text-center" scope="row">1</th>
-                            <td class="text-center">Aurelia</td>
-                            <td class="text-center">Aurelia Martha Mavalda Huwae</td>
-                            <td class="text-center">201971032</td>
-                            <td class="text-center"><?= datetime(); ?></td>
-                            <td class="text-center">
-                                <a href="edit_users.php" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="hapus.php?hapus_user=1" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        <?php foreach (findAll('users') as $u) : ?>
+                            <tr>
+                                <th class="text-center" scope="row">1</th>
+                                <td class="text-center"><?= $u['username']; ?></td>
+                                <td class="text-center"><?= $u['nama_lengkap']; ?></td>
+                                <td class="text-center"><?= $u['nim']; ?></td>
+                                <td class="text-center"><?= $u['terakhir_login']; ?></td>
+                                <td class="text-center">
+                                    <a href="edit_users.php?id=<?= $u['id']; ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a onclick="return confirm('Hapus User?')" href="hapus.php?hapus_user=<?= $u['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

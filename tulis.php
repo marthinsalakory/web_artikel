@@ -21,16 +21,16 @@
             <div class="col-lg-12">
                 <form role="form" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="form-label" for="topik">Topik</label>
-                        <input class="form-control" name="topik" id="topik">
+                        <label class="form-label" for="topik">Topik <span class="text-danger">*</span></label>
+                        <input required autocomplete="off" class="form-control" name="topik" id="topik">
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="gambar">Gambar</label>
-                        <input class="form-control" name="gambar" id="gambar" type="file">
+                        <label class="form-label" for="gambar">Gambar <span class="text-danger">*</span></label>
+                        <input required autocomplete="off" class="form-control" name="gambar" id="gambar" type="file">
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="isi">Isi</label>
-                        <textarea class="form-control" name="isi" id="isi" rows="10"></textarea>
+                        <label class="form-label" for="isi">Isi <span class="text-danger">*</span></label>
+                        <textarea required autocomplete="off" class="form-control" name="isi" id="isi" rows="10"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
